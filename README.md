@@ -1,3 +1,29 @@
+Flash Cards MVP:
+user can see a single flashcard
+user can play a "round," which is a series of guesses over all the cards in a deck
+user can make a guess on a single flashcard
+user is told if they make an incorrect guess
+---------------------------------------------
+user can skip a flashcard
+user can guess on skipped flashcards after running through the deck once
+
+user skips a flashcard if they guess incorrectly too many times
+user receives a score at the end of the game
+
+
+user can choose a deck to play
+user can create their own deck
+
+user can log in
+user can see all their past scores
+user can see a high score table
+
+user sees a styled site
+user sees a responsively styled site
+
+
+
+
 > **Note**: This branch (master) contains a skeleton without any app code, perfect for creating a _new_ application or challenge. If you're looking for an example app built with this skeleton, take a look at the [example](/../..//tree/example) branch which includes basic CRUD and RSpec tests.
 
 ### Purpose
