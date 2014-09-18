@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Welcome to Flash Your Self</h1>
+   <h3>Please choose a deck to begin your game!</h3>
+    <!-- <h1>Welcome to Flash Your Self</h1> -->
+     <% @decks.each do |deck|  %>
+
+    <p><a href='/deck/<% deck[:id] %>'</a><%= deck[:category] %></p>
+     <% end %>
+</div>
+<!-- for each deck display deck -->
+
