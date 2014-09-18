@@ -1,19 +1,33 @@
 #displays the decks
 get '/' do
-  @decks = [{id: 1, category: 'Fruit' }, {id: 2, category: 'cars'}]
-  @cards = [{id: 3, deck_id: 1, question: "is an orange citrus fruit", answer: "orange"},
-    {id: 3, deck_id: 1, question: "is an red fruit", answer: "apple"}]
+  @decks = Deck.all
+  @cards = Card.all
   erb :index
 end
 
 #takes you to deck by id ex 'fruits',
 #shows all the cards for a specific deck
-get '/deck/:id' do
-   @current_deck = Deck.find(params[:id])
-   #finding all cards with deck id
-   @all_card_in_deck = Card.find_by(deck_id: 1)
-  erb :show_deck
 
+get '/deck/:id' do
+
+   session[:current_deck] = Deck.find( params[:id] ) unless params[:id].nil?
+
+   session[:cards_left_in_deck] = session[:current_deck].cards.clone
+   session[:current_card] = session[:cards_left_in_deck].pop
+
+   erb :show_deck
 end
 
-#deck.cards
+post "/answer" do
+  answer = params[:user_answer]
+
+  if answer == session[:current_card].answer
+    session[:current_card_answered?] = true
+  else
+    session[:current_card_answered?] = false
+  end
+
+  session[:current_card] = session[:cards_left_in_deck].pop if session[:current_card_answered?]
+
+  redirect '/deck'
+end
