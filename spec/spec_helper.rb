@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'faker'
 
 # All our specs should require 'spec_helper' (this file)
 
