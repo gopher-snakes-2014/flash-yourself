@@ -1,17 +1,21 @@
 require_relative 'spec_helper'
 describe "Card" do
   before(:all) do
-    @some_deck = Deck.all.sample
-    @cards = []
-    10.times {
-      @cards << Card.create(
-        :question => Faker::Lorem.sentence(rand(4)+4),
-        :answer => Faker::Lorem.word,
-        :belongs_to => @some_deck
-      )
+    @new_decks = []
+    6.times {
+      @new_decks << Deck.create(:category=>Faker::Lorem.word)
     }
 
-
+    @cards = []
+    10.times {
+       a_card = Card.create(
+        :question => Faker::Lorem.sentence(rand(4)+4),
+        :answer => Faker::Lorem.word
+      )
+      a_card.deck = Deck.all.sample
+      a_card.save
+      @cards <<a_card
+    }
   end
 
   it "is a card" do
@@ -20,12 +24,10 @@ describe "Card" do
     }
 
   end
-  it "belongs to a deck" do
-    expect(@cards.sample.deck).to eq @some_deck
-  end
+
   it "shares a deck with other cards" do
     some_card = @cards.sample
-    expect(some_card.deck.cards).to include some_card
+    expect(some_card.deck.cards.all).to include some_card
   end
   it "has a question and an answer" do
     @cards.each { |card|
