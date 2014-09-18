@@ -10,7 +10,18 @@ end
 
 get '/deck/:id' do
 
-   session[:current_deck] = Deck.find( params[:id] ) unless params[:id].nil?
+  unless params[:id].nil? do
+    session[:current_deck] = Deck.find(params[:id])
+    puts "****************************"
+    p session[:current_deck]
+    puts "****************************"
+    session[:cards_left_in_deck] = []
+    Deck.find( params[:id] ).each {|i|
+    session[:current_deck].push i  }
+  end
+ end
+
+
 
    session[:cards_left_in_deck] = session[:current_deck].cards.clone
    session[:current_card] = session[:cards_left_in_deck].pop
