@@ -1,5 +1,6 @@
 <div class="container">
 
+
   <% current_deck = Deck.find(session[:current_deck_id]) %>
   <% current_card = Card.find(session[:current_card_id]) %>
 
@@ -11,6 +12,8 @@
       Your answer: <input type="text" name="user_answer">
       <input type="submit" value="submit your answer">
     </form>
+
+    <%  erb :response_to_user_input_with_correct_answer   %>
 
 </div>
 
