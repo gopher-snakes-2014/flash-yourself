@@ -26,6 +26,7 @@ a {
   border-radius: 15%;
   padding: .5em;
   border: none;
+  font-family: 'Roboto Slab', serif;
 
 }
 
@@ -53,7 +54,12 @@ a:active {
   color: white;
   text-align: left;
   padding-top: 2em;
-  padding-left: 30em
+  padding-left: 30em;
+  font-family: 'Roboto Slab', serif;
 
+}
+
+#submit {
+  color: black;
 }
 

@@ -81,3 +81,25 @@ new_question = Card.create(question: array[0], answer: array[1])
 new_question.deck = seed_deck
 new_question.save
 end
+
+
+
+seed_deck = Deck.create(category: "Fruit")
+
+[
+["What's the tastiest fruit", "banana"],
+["What's the common name for a musa sapientum", "banana"],
+["What fruit if you rub it on a mosquito bite will alleviate the itch?", "banana"],
+["What fruit is best with peanut butter and honey in a sandwich?", "banana"],
+["What snack does Andrew McClellan always bring to class? ", "banana"],
+["What fruit is flashing you right now?", "banana!"],
+
+
+
+].each do |array|
+
+new_question = Card.create(question: array[0], answer: array[1])
+new_question.deck = seed_deck
+new_question.save
+end
+
