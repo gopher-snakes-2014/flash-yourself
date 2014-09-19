@@ -1,6 +1,6 @@
 <div class="container">
 
-  <h1>Deck: <%= @current_deck.id%></h1>
+  <h1>Deck: <%= session[:current_deck].category%></h1>
 
     Next question: <%=session[:current_card].question%>
 

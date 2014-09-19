@@ -10,35 +10,40 @@ end
 
 get '/deck/:id' do
 
-  unless params[:id].nil? do
+  unless params[:id].nil?
     session[:current_deck] = Deck.find(params[:id])
-    puts "****************************"
-    p session[:current_deck]
-    puts "****************************"
     session[:cards_left_in_deck] = []
-    Deck.find( params[:id] ).each {|i|
-    session[:current_deck].push i  }
+    Deck.find( params[:id] ).cards.each {
+      |i|
+      session[:cards_left_in_deck].id.push i
+    }
   end
- end
 
+  session[:current_card] = session[:cards_left_in_deck].pop
+ puts "**********************"
+  p session[:current_card]
+  puts "**********************"
+  raise "session current card is nil, o craps." if session[:current_card].nil?
 
+  erb :show_deck
 
-   session[:cards_left_in_deck] = session[:current_deck].cards.clone
-   session[:current_card] = session[:cards_left_in_deck].pop
-
-   erb :show_deck
 end
 
 post "/answer" do
   answer = params[:user_answer]
-
+  puts "**********************"
+  p session[:current_card]
+  puts "**********************"
   if answer == session[:current_card].answer
     session[:current_card_answered?] = true
   else
     session[:current_card_answered?] = false
   end
 
-  session[:current_card] = session[:cards_left_in_deck].pop if session[:current_card_answered?]
+  if session[:current_card_answered?]
+    session[:current_card] = session[:cards_left_in_deck].pop
+    session[:current_card_answered] = false
+  end
 
   redirect '/deck'
 end
