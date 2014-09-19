@@ -24,7 +24,7 @@ get '/deck/:id' do
     }
   end
 
-  session[:current_card_id] = session[:cards_left_in_deck].pop
+  session[:current_card_id] = session[:cards_left_in_deck].sample
 
   raise "session current card is nil, o craps." if session[:current_card_id].nil?
 
@@ -37,6 +37,9 @@ post "/answer" do
   puts "**********************"
   current_card =  Card.find(session[:current_card_id])
   puts "**********************"
+    puts "Answer: #{answer}"
+    puts "current_card.answer: #{current_card.answer}"
+    p answer == current_card.answer
   if answer == current_card.answer
     session[:current_card_answered?] = true
   else
@@ -44,8 +47,9 @@ post "/answer" do
   end
 
   if session[:current_card_answered?]
-    current_card = session[:cards_left_in_deck].pop
-    session[:current_card_answered] = false
+    puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+    session[:current_card_id] = session[:cards_left_in_deck].sample
+    session[:current_card_answered?] = false
   end
 
   redirect "/deck/#{session[:current_deck_id]}"
