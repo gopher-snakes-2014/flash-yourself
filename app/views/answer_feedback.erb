@@ -1,0 +1,13 @@
+
+  <div>
+    <% @user_answer = params[:user_answer] %>
+    <%p session[:last_card_id]%>
+    <% last_card = Card.find(session[:last_card_id])%>
+    <% if last_card.answer == @user_answer %>
+      <p>Correct! a million dollars to you</p>
+    <% else %>
+      <p>wrongo dumbass! you lose 10 points</p>
+      <p>correct answer: <%last_card.answer%></p>
+    <%end%>
+
+  </div>

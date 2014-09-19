@@ -61,8 +61,10 @@ end
 post "/answer" do
 
   @user_answer = params[:user_answer]
-
-  current_card =  Card.find(session[:current_card_id])
+  p "**************************************"
+  p current_card =  Card.find(session[:current_card_id])
+  p @user_answer
+  p "**************************************"
 
   if @user_answer == current_card.answer
     session[:current_card_answered?] = true
@@ -70,12 +72,14 @@ post "/answer" do
     session[:current_card_answered?] = false
   end
 
-  if session[:current_card_answered?]
+  session[:last_card_id] = session[:current_card_id]
 
-    @last_card_id = session[:current_card_id]
+  if session[:current_card_answered?]
     session[:current_card_id] = session[:cards_left_in_deck].sample
     session[:current_card_answered?] = false
   end
+
+
 
   redirect "/deck/#{session[:current_deck_id]}"
 end

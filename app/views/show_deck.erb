@@ -1,6 +1,4 @@
 
-
-
 <div class="container">
 
 
@@ -9,14 +7,12 @@
 
   <h1>Deck: <%= current_deck.category%></h1>
 
-    Next question: <%=current_card.question%>
+    Question: <%=current_card.question%>
 
     <form action="/answer" method="post">
       Your answer: <input type="text" name="user_answer">
       <input type="submit" value="submit your answer">
     </form>
-
-<%= erb :x %>
 
 </div>
 
