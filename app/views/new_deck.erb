@@ -1,27 +1,27 @@
 <div class="container">
-
+  <%= @error_message if @error_message.present?  %>
   <h1>Create a Deck</h1>
 
     <form action="/new" method="post">
-      Your Category: <input type="text" name="category">
+      Your Category: <input class="form_field" type="text" name="category">
 
-      <p>Card1</p>
-      Your question: <input type="text" name="question_1">
-      Your answer: <input type="text" name="answer_1">
+      <p>First Card</p>
+      Your question: <input class="form_field" type="text" name="question_1">
+      Your answer: <input class="form_field" type="text" name="answer_1">
 
-       <p>Card2</p>
-      Your question: <input type="text" name="question_2">
-      Your answer: <input type="text" name="answer_2">
+       <p>Second Card</p>
+      Your question: <input class="form_field" type="text" name="question_2">
+      Your answer: <input class="form_field" type="text" name="answer_2">
 
-       <p>Card3</p>
-      Your question: <input type="text" name="question_3">
-      Your answer: <input type="text" name="answer_3">
+       <p>Third Card</p>
+      Your question: <input class="form_field" type="text" name="question_3">
+      Your answer: <input class="form_field" type="text" name="answer_3">
 
-       <p>Card4</p>
-      Your question: <input type="text" name="question_4">
-      Your answer: <input type="text" name="answer_4">
+       <p>Fourth Card</p>
+      Your question: <input class="form_field" type="text" name="question_4">
+      Your answer: <input class="form_field" type="text" name="answer_4">
 
-      <input id="submit" type="submit" value="submit your answer">
+      <input class="form_field" id="submit" type="submit" value="submit your answer">
     </form>
     <br>
     <br>
