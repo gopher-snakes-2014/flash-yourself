@@ -1,0 +1,29 @@
+<div class="container">
+
+  <% current_deck = Deck.find(session[:current_deck_id]) %>
+  <% current_card = Card.find(session[:current_card_id]) %>
+
+  <h1>Deck: <%= current_deck.category%></h1>
+
+    Next question: <%=current_card.question%>
+
+    <form action="/answer" method="post">
+      Your answer: <input type="text" name="user_answer">
+      <input type="submit" value="submit your answer">
+    </form>
+
+</div>
+
+<!-- form for answer
+GET
+POST and link for submit
+ A. right or wrong :
+sucess message
+-redirect to ...
+-check session for if played true/false
+-->
+<!-- link for home -->
+
+
+
+

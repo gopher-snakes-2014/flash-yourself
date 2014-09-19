@@ -33,35 +33,135 @@ end
 
 get '/deck/:id' do
 
-  unless params[:id].nil? do
-    session[:current_deck] = Deck.find(params[:id])
-    puts "****************************"
-    p session[:current_deck]
-    puts "****************************"
+  unless params[:id].nil?
+
+    session[:current_deck_id] = params[:id]
+
+    current_deck = Deck.find(params[:id])
+
     session[:cards_left_in_deck] = []
-    Deck.find( params[:id] ).each {|i|
-    session[:current_deck].push i  }
+
+    Deck.find( params[:id] ).cards.each {
+      |card|
+      session[:cards_left_in_deck] << card.id
+    }
   end
- end
 
+  session[:current_card_id] = session[:cards_left_in_deck].sample
 
+  raise "session current card is nil, o craps." if session[:current_card_id].nil?
 
-   session[:cards_left_in_deck] = session[:current_deck].cards.clone
-   session[:current_card] = session[:cards_left_in_deck].pop
+  erb :show_deck
 
-   erb :show_deck
 end
 
 post "/answer" do
   answer = params[:user_answer]
-
-  if answer == session[:current_card].answer
+  puts "**********************"
+  current_card =  Card.find(session[:current_card_id])
+  puts "**********************"
+    puts "Answer: #{answer}"
+    puts "current_card.answer: #{current_card.answer}"
+    p answer == current_card.answer
+  if answer == current_card.answer
     session[:current_card_answered?] = true
   else
     session[:current_card_answered?] = false
   end
 
-  session[:current_card] = session[:cards_left_in_deck].pop if session[:current_card_answered?]
+  if session[:current_card_answered?]
+    puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+    session[:current_card_id] = session[:cards_left_in_deck].sample
+    session[:current_card_answered?] = false
+  end
 
-  redirect '/deck'
+  redirect "/deck/#{session[:current_deck_id]}"
 end
+
+
+
+
+
+
+
+
+
+
+
+# get '/deck/:id' do
+
+
+#  #  unless params[:id].nil? do
+#  #    session[:current_deck] = Deck.find(params[:id])
+#  #    puts "****************************"
+#  #    p session[:current_deck]
+#  #    puts "****************************"
+#  #    session[:cards_left_in_deck] = []
+#  #    Deck.find( params[:id] ).each {|i|
+#  #    session[:current_deck].push i  }
+#  #  end
+#  # end
+
+
+
+#  #   session[:cards_left_in_deck] = session[:current_deck].cards.clone
+#  #   session[:current_card] = session[:cards_left_in_deck].pop
+
+#  #   erb :show_deck
+
+#   unless params[:id].nil?
+
+#     session[:current_deck_id] = params[:id]
+
+#     current_deck = Deck.find(params[:id])
+
+#     session[:cards_left_in_deck] = []
+
+#     Deck.find( params[:id] ).cards.each {
+#       |card|
+#       session[:cards_left_in_deck] << card.id
+#     }
+#   end
+
+#   session[:current_card_id] = session[:cards_left_in_deck].sample
+
+#   raise "session current card is nil, o craps." if session[:current_card_id].nil?
+
+#   erb :show_deck
+
+# # >>>>>>> 7e03eb3fc165b6b45e660cf1bb5af84639676efc
+# # end
+
+# # post "/answer" do
+# #   answer = params[:user_answer]
+# # <<<<<<< HEAD
+
+# #   if answer == session[:current_card].answer
+
+# #   puts "**********************"
+# #   current_card =  Card.find(session[:current_card_id])
+# #   puts "**********************"
+# #     puts "Answer: #{answer}"
+# #     puts "current_card.answer: #{current_card.answer}"
+# #     p answer == current_card.answer
+# #   # if answer == current_card.answer
+# # >>>>>>> 7e03eb3fc165b6b45e660cf1bb5af84639676efc
+# #     session[:current_card_answered?] = true
+# #   else
+# #     session[:current_card_answered?] = false
+# #   end
+
+# # <<<<<<< HEAD
+#   session[:current_card] = session[:cards_left_in_deck].pop if session[:current_card_answered?]
+
+#   redirect '/deck'
+# # =======
+#   if session[:current_card_answered?]
+#     puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+#     session[:current_card_id] = session[:cards_left_in_deck].sample
+#     session[:current_card_answered?] = false
+#   end
+
+#   redirect "/deck/#{session[:current_deck_id]}"
+# >>>>>>> 7e03eb3fc165b6b45e660cf1bb5af84639676efc
+# end
