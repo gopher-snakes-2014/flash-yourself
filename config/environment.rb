@@ -17,7 +17,6 @@ require 'logger'
 
 require 'sinatra'
 require "sinatra/reloader" if development?
-require 'activerecord-session_store'
 require 'erb'
 
 # Some helper constants for path-centric logic

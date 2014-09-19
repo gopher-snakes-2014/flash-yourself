@@ -1,8 +1,11 @@
 <div class="container">
 
-  <h1>Deck: <%= session[:current_deck].category%></h1>
+  <% current_deck = Deck.find(session[:current_deck_id]) %>
+  <% current_card = Card.find(session[:current_card_id]) %>
 
-    Next question: <%=session[:current_card].question%>
+  <h1>Deck: <%= current_deck.category%></h1>
+
+    Next question: <%=current_card.question%>
 
     <form action="/answer" method="post">
       Your answer: <input type="text" name="user_answer">
