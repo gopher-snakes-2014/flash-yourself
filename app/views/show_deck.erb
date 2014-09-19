@@ -1,0 +1,26 @@
+<div class="container">
+
+  <h1>Deck: <%= @current_deck.id%></h1>
+
+    Next question: <%=session[:current_card].question%>
+
+    <form action="/answer" method="post">
+      Your answer: <input type="text" name="user_answer">
+      <input type="submit" value="submit your answer">
+    </form>
+
+</div>
+
+<!-- form for answer
+GET
+POST and link for submit
+ A. right or wrong :
+sucess message
+-redirect to ...
+-check session for if played true/false
+-->
+<!-- link for home -->
+
+
+
+
