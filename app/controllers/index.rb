@@ -55,22 +55,24 @@ get '/deck/:id' do
 
 end
 
+
+
+
 post "/answer" do
-  answer = params[:user_answer]
-  puts "**********************"
+
+  @user_answer = params[:user_answer]
+
   current_card =  Card.find(session[:current_card_id])
-  puts "**********************"
-    puts "Answer: #{answer}"
-    puts "current_card.answer: #{current_card.answer}"
-    p answer == current_card.answer
-  if answer == current_card.answer
+
+  if @user_answer == current_card.answer
     session[:current_card_answered?] = true
   else
     session[:current_card_answered?] = false
   end
 
   if session[:current_card_answered?]
-    puts "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&"
+
+    @last_card_id = session[:current_card_id]
     session[:current_card_id] = session[:cards_left_in_deck].sample
     session[:current_card_answered?] = false
   end
