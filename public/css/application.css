@@ -49,3 +49,11 @@ a:active {
     color: #09265C;
 }
 
+.container {
+  color: white;
+  text-align: left;
+  padding-top: 2em;
+  padding-left: 30em
+
+}
+
