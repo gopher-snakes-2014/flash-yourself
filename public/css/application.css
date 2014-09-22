@@ -1,5 +1,7 @@
 body {
+  /* may be missing some parameters on background shorthand? */
   background: url(/images/fruitflasher.jpg) no-repeat center center fixed;
+  /* background-size is not supported cross-browser */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -9,6 +11,7 @@ body {
 .welcome {
   text-align: center;
   color: white;
+  /* font-family not properly declared anywhere */
   font-family: 'Indie Flower', cursive;
   font-size: x-large;
 }
@@ -18,16 +21,22 @@ body {
 .decks {
   text-align: left;
   padding-left: 25em;
+  /* font-family not properly declared anywhere */
   font-family: 'Roboto Slab', serif;
 }
 
+/* you want these styles to apply to EVERY <a> element? */
+/* also, should use pseudo-states on <a> element */
 a {
+  /* opacity not supported cross-browser */
   opacity: 0.5;
   line-height: 175%;
   background-color: grey;
+  /* border-radius not supported cross-browser */
   border-radius: 15%;
   padding: .5em;
   border: none;
+  /* font-family not properly declared anywhere */
   font-family: 'Roboto Slab', serif;
 
 }
