@@ -9,15 +9,16 @@ get '/new' do
   erb :new_deck
 end
 
+# route is weird; should represent what entity you're creating (deck)
 post '/new' do
 
-
+  # does this validation message actually work?
   if params.values.any?{ |val| val.blank?}
     @error_message = "fill out your fucking forms pretty please"
     redirect '/new'
 
   else
-
+    # DRY it up!
     category = Deck.create(category: params[:category])
     question1 = Card.new(question: params[:question_1], answer: params[:answer_1])
     question1.deck = category
@@ -41,6 +42,7 @@ end
 
 get '/deck/:id' do
 
+  # you're storing a lot of data within the session; is this necessary? why?
   unless params[:id].nil?
 
     session[:current_deck_id] = params[:id]
@@ -65,6 +67,7 @@ end
 
 post "/answer" do
   answer = params[:user_answer]
+  # don't leave puts statements in production code
   puts "**********************"
   current_card =  Card.find(session[:current_card_id])
   puts "**********************"
