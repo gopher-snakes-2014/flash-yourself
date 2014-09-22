@@ -1,7 +1,9 @@
+<!-- html, head, and body elements are provided by layout.erb -->
 <!DOCTYPE html>
 <html>
 
 <head>
+<!-- put references to CSS in <head> in layout.erb -->
 <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
 </head>
@@ -16,6 +18,7 @@
     <% @decks.each do |deck|  %>
     <p><a href='/deck/<%= deck.id %>'><%= deck.category %></a></p>
     <% end %>
+    <!-- avoid using <br> to vertically style things; use CSS margins and positioning -->
     <br>
     <br>
     <p><a href='/new'> Create Your Own Deck!</a></p>
